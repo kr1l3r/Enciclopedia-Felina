@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registro - Enciclopedia Felina</title>
+  <style>
+    :root{--dark:#0f1724;--accent:#7aa2ff;--card:#fff}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;background:linear-gradient(180deg,#fcfdff 0%,#fbfbfe 100%);color:var(--dark)}
+    header{background:linear-gradient(90deg,var(--accent),#6f8eff);color:white;padding:18px 16px;display:flex;align-items:center;justify-content:space-between}
+    .wrap{max-width:700px;margin:26px auto;padding:0 16px}
+    .card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 8px 30px rgba(12,20,40,0.06)}
+    .hero{display:flex;gap:16px;align-items:center}
+    .hero img{width:160px;height:120px;object-fit:cover;border-radius:12px}
+    form{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+    input{padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,.08)}
+    button{padding:10px;border-radius:10px;border:0;background:linear-gradient(90deg,#ffd1e0,#ffd9b8);cursor:pointer;font-weight:700}
+    footer{background:#0f1724;color:#e6eef8;padding:16px;margin-top:26px;text-align:center}
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display:flex;align-items:center;gap:12px">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M12 2c2.7 0 4 1.8 4 1.8s1.8 1 1.8 3.6c0 2.6-1.8 4-1.8 4s1.8 1.4 1.8 4.2c0 2.8-2.2 4.4-6 4.4s-6-1.6-6-4.4c0-2.8 1.8-4.2 1.8-4.2S6 9.4 6 6.8C6 4.2 7.3 3.2 10 3.2s2 .8 2-1.2z" fill="#fff" opacity="0.12"/></svg>
+      <div>
+        <div style="font-size:18px;font-weight:700">Enciclopedia Felina</div>
+        <div style="font-size:13px;opacity:.9">¡Únete a nuestra comunidad felina!</div>
+      </div>
+    </div>
+    <div style="color:white;font-weight:700">🐾 Regístrate aquí</div>
+  </header>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="hero">
+        <img src="https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg" alt="Gato saludando">
+        <div style="text-align:left">
+          <h2>🐾 ¡Únete a nuestra comunidad felina!</h2>
+          <p style="color:#6b7280">Recibe consejos, curiosidades y todo lo que necesitas para cuidar mejor a tu gato.</p>
+        </div>
+      </div>
+
+      <form id="regForm">
+        <input type="text" id="name" placeholder="Nombre completo" required>
+        <input type="email" id="email" placeholder="Correo electrónico" required>
+        <input type="password" id="pass" placeholder="Contraseña" required>
+        <button type="submit">Registrarme</button>
+      </form>
+      <p id="note" style="color:var(--muted);margin-top:10px">Al registrarte recibirás contenido sobre cuidados felinos.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>📧 contacto: info@cuidadosfelinos.com | 📞 +57 312 987 6543</p>
+    <p style="opacity:.8">Hecho con ❤️ para amantes de los gatos</p>
+  </footer>
+
+  <script>
+    // Simple registration behavior: alert + clear form
+    const form = document.getElementById('regForm');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      // emulate saving - in a real site you'd send to server
+      const name = document.getElementById('name').value;
+      alert('✅ Registro exitoso. ¡Gracias, ' + (name || '') + '! Pronto recibirás información sobre el cuidado de tu gato.');
+      form.reset();
+      // optionally redirect back to index
+      setTimeout(()=> window.location.href = 'index.html', 10);
+    });
+  </script>
+</body>
+</html>

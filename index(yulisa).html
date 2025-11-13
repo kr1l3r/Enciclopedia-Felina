@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Enciclopedia Felina — Razas, Cuidado y Juego</title>
+  <style>
+    :root{
+      --bg:#fbfbfe;--card:#ffffff;--accent:#7aa2ff;--accent-2:#ffd1e0;--mint:#b7f0d3;--muted:#6b7280;--dark:#0b1220;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;background:linear-gradient(180deg,#fcfdff 0%,var(--bg) 100%);color:var(--dark)}
+    header{background:linear-gradient(90deg,var(--accent),#6f8eff);color:white;padding:20px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{margin:0;font-size:20px}
+    .cta{background:linear-gradient(90deg,#ffd1e0,#ffd9b8);color:#2b2b2b;padding:10px 14px;border-radius:999px;border:0;cursor:pointer;font-weight:700;box-shadow:0 6px 18px rgba(15,23,42,.08)}
+    .wrap{max-width:1100px;margin:18px auto;padding:0 16px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+    .card{background:var(--card);border-radius:14px;padding:16px;box-shadow:0 8px 24px rgba(20,30,60,0.06)}
+    .section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+    h2{margin:0;font-size:18px}
+    .breeds{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+    .breed{border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fff,#fbfcff);border:1px solid rgba(15,23,42,.04);text-align:left}
+    .breed img{width:100%;height:150px;object-fit:cover;display:block}
+    .breed .info{padding:12px}
+    .breed h3{margin:0 0 6px;font-size:16px}
+    .breed p{margin:0;color:var(--muted);font-size:14px}
+    /* cuidados */
+    .care-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .care-item{background:linear-gradient(180deg, #fff, #fffaf6);padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,.03)}
+    /* tictactoe */
+    .tictactoe{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .board{display:grid;grid-template-columns:repeat(3,92px);grid-auto-rows:92px;gap:10px;background:transparent}
+    .cell{background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:42px;cursor:pointer;box-shadow:0 6px 16px rgba(15,23,42,.06)}
+    .controls{display:flex;gap:8px}
+    .btn{padding:8px 12px;border-radius:10px;border:0;cursor:pointer;background:var(--accent);color:white}
+    .btn.ghost{background:#fff;border:1px solid rgba(15,23,42,.06);color:var(--dark)}
+    aside .card{position:sticky;top:20px}
+    footer{background:#0f1724;color:#e6eef8;padding:16px;margin-top:26px;text-align:center;border-top:1px solid rgba(255,255,255,.03)}
+    footer p{margin:6px 0}
+    /* responsive */
+    @media(max-width:980px){.grid{grid-template-columns:1fr;padding-bottom:20px}.breeds{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}.care-list{grid-template-columns:1fr}.board{grid-template-columns:repeat(3,72px);grid-auto-rows:72px}.cell{font-size:34px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2c2.7 0 4 1.8 4 1.8s1.8 1 1.8 3.6c0 2.6-1.8 4-1.8 4s1.8 1.4 1.8 4.2c0 2.8-2.2 4.4-6 4.4s-6-1.6-6-4.4c0-2.8 1.8-4.2 1.8-4.2S6 9.4 6 6.8C6 4.2 7.3 3.2 10 3.2s2 .8 2-1.2z" fill="#fff" opacity="0.12"/></svg>
+      <div>
+        <h1>Enciclopedia Felina</h1>
+        <div style="font-size:13px;color:rgba(255,255,255,0.9)">Razas, cuidados y juegos para amantes de los gatos</div>
+      </div>
+    </div>
+    <button class="cta" id="registroBtn">🐾 ¡Regístrate aquí para más información!</button>
+  </header>
+
+  <div class="wrap">
+    <div class="grid">
+      <main>
+        <section class="card">
+          <div class="section-title"><h2>Razas destacadas</h2><div class="muted" style="color:var(--muted)">12 razas con fotos reales</div></div>
+          <div class="breeds" id="breeds">
+            <!-- Breed cards inserted by JS -->
+          </div>
+        </section>
+
+        <section class="card" style="margin-top:16px">
+          <div class="section-title"><h2>Cuidados esenciales</h2></div>
+          <div class="care-list">
+            <div class="care-item"><strong>Alimentación</strong><p class="muted">Pienso o dietas equilibradas según edad y condición; controla las raciones y evita comida humana peligrosa.</p></div>
+            <div class="care-item"><strong>Hidratación</strong><p class="muted">Agua fresca siempre; fuentes bebedoras animan a beber más.</p></div>
+            <div class="care-item"><strong>Higiene</strong><p class="muted">Cepillado según tipo de pelo, limpieza de arenero diaria y baños sólo cuando sea necesario.</p></div>
+            <div class="care-item"><strong>Salud</strong><p class="muted">Visitas al veterinario, calendario de vacunas, desparasitación y control dental.</p></div>
+            <div class="care-item"><strong>Enriquecimiento</strong><p class="muted">Rascadores, juguetes, plataformas y tiempo de juego diario para evitar estrés y aburrimiento.</p></div>
+            <div class="care-item"><strong>Seguridad</strong><p class="muted">Evita plantas tóxicas, vigila ventanas y balcones, y mantén productos tóxicos fuera de su alcance.</p></div>
+            <div class="care-item"><strong>Socialización</strong><p class="muted">Respeta sus tiempos; refuerza con premios y cariño; supervisa introducciones con otros animales.</p></div>
+            <div class="care-item"><strong>Viajes y transporte</strong><p class="muted">Transportadores seguros, acostumbrarlo poco a poco y consultar calma/medicación si es necesario.</p></div>
+          </div>
+        </section>
+
+        <section class="card" style="margin-top:16px">
+          <div class="section-title"><h2>Tres en Raya — Versión felina</h2><div class="muted">Elige modo y juega</div></div>
+          <div class="tictactoe">
+            <div id="ttt-status" style="color:var(--muted)">Turno: <strong id="turn-ind">Jugador 1 🐱</strong></div>
+            <div class="board" id="board"></div>
+            <div class="controls">
+              <button class="btn" id="newGame">Nuevo juego</button>
+              <button class="btn ghost" id="toggleMode">Modo: vs CPU</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <aside>
+        <div class="card">
+          <h3>Cuenta</h3>
+          <p style="color:var(--muted)">Usa el botón superior para registrarte o iniciar sesión.</p>
+          <div style="height:12px"></div>
+          <div style="display:flex;gap:8px">
+            <button class="btn ghost" id="loginLink">Ir a registro</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h3>Contacto rápido</h3>
+          <p style="color:var(--muted)">📧 info@cuidadosfelinos.com<br>📞 +57 312 987 6543</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <footer>
+    <p>📧 contacto: info@cuidadosfelinos.com | 📞 +57 312 987 6543</p>
+    <p style="opacity:.8">Hecho con ❤️ para amantes de los gatos</p>
+  </footer>
+
+  <script>
+    // Breed data: 12 breeds with images (TheCatAPI public images)
+    const breeds = [
+      {name:'Siames', img:'https://verdecora.es/blog/wp-content/uploads/2016/12/gato-siames-caracter-historia.jpg', desc:'Activo y vocal, pelo corto y ojos azules. Originario de Tailandia. Es cariñoso, sociable y le encanta comunicarse con maullidos. Necesita compañía y atención frecuente.'},
+      {name:'Persa', img:'https://images.ctfassets.net/denf86kkcx7r/15HC92CcCjQEg7U14aZkVM/914db181ce7e407bc2a0220436a32aa4/un_gato_persa-39', desc:'Tranquilo, pelo largo; requiere cepillado diario. De Irán. Pelo largo y carácter tranquilo. Le gusta la calma y los ambientes silenciosos. Requiere cepillado diario'},
+      {name:'Maine Coon', img:'https://cdn.royalcanin-weshare-online.io/fT9b43oBRYZmsWpcO7Yv/v15/bp-lot-1-maine-coon-bw-ws-1', desc:'Grande y sociable; pelo abundante. Gigante amable de EE.UU. Amigable, curioso y protector. Necesita espacio y cepillado frecuente.'},
+      {name:'Bengalí', img:'https://www.tiendanimal.es/articulos/wp-content/uploads/2020/04/gato-bengali-1200x720.jpg', desc:'Muy activo y curioso; le encantan los retos. De aspecto salvaje y energía alta. Juguetón, inteligente y amante del agua. Necesita actividad física diaria.'},
+      {name:'Sphynx', img:'https://cdn.wamiz.fr/cdn-cgi/image/format=auto,quality=80,width=1200,height=675,fit=cover/animal/breed/cat/adult/676d5a51d1f40103732431.jpg', desc:'Sin pelo, piel sensible; requiere baños suaves.Cariñoso y relajado; ideal para familias. Sin pelo y de corazón cálido. Requiere baños frecuentes y protección del frío. Extremadamente cariñoso'},
+      {name:'Ragdoll', img:'https://catinaflat.blog/wp-content/uploads/2023/01/ragdoll_cat_pexels.png', desc:'.Grande, de carácter dócil y amoroso. Se relaja completamente al ser cargado. Perfecto para familias.'},
+      {name:'British Shorthair', img:'https://scampsandchamps.co.uk/wp-content/uploads/2025/02/pexels-lichtblick800-29750372.jpg', desc:'De pelaje denso y carácter calmado. Pelaje denso, mirada dulce. Tranquilo, independiente y afectuoso. Ideal para departamentos.'},
+      {name:'Abisinio', img:'https://clinicalaveterinaria.it/wp-content/uploads/2024/12/Il-gatto-Abissino.jpg', desc:'Activo, elegante y curioso. De las más antiguas razas.Muy leal. Le gusta trepar y explorar.'},
+      {name:'Bosque de Noruega', img:'https://cloudfront-us-east-1.images.arcpublishing.com/infobae/76LXD7AJXRFVBCBXL37XZJCNUM.png', desc:'Fuerte, de pelo largo y resistente. Rústico y fuerte. Excelente cazador y amante del aire libre. Su pelaje requiere cepillado.<'},
+      {name:'Azul Ruso', img:'https://www.hola.com/horizon/landscape/f155b7e919bc-gato-azul-ruso-t.jpg', desc:'Elegante y reservado. Su pelaje corto y gris azulado es distintivo. Muy leal y sensible.'},
+      {name:'Scottish Fold', img:'https://cdn.wamiz.fr/cdn-cgi/image/format=auto,quality=80,width=1200,height=675,fit=cover/animal/breed/cat/adult/6687c811719fb656583283.jpg', desc:'Orejas dobladas y expresión tierna. Amigable y tranquilo. Requiere controles de salud regulares.'},
+      {name:'Munchkin', img:'https://www.purina.com/sites/default/files/2025-08/munchkin_cat_3.jpg', desc:'Patas cortas y actitud juguetona. Curioso, alegre y sociable. No sufre por su tamaño.'}
+    ];
+
+    const breedsContainer = document.getElementById('breeds');
+    breeds.forEach(b=>{
+      const el = document.createElement('article');
+      el.className = 'breed';
+      el.innerHTML = `<img src="${b.img}" alt="${b.name}"><div class="info"><h3>${b.name}</h3><p>${b.desc}</p></div>`;
+      breedsContainer.appendChild(el);
+    });
+
+    // Registration button links to registro.html
+    document.getElementById('registroBtn').addEventListener('click', ()=> window.location.href = 'registro.html');
+    document.getElementById('loginLink').addEventListener('click', ()=> window.location.href = 'registro.html');
+
+    // Tic-tac-toe implementation with two icons, vs CPU simple AI
+    const boardEl = document.getElementById('board');
+    const statusEl = document.getElementById('turn-ind');
+    let board = Array(9).fill(null);
+    const icon1 = '🐱', icon2 = '🐾';
+    let turn = 'p1'; // 'p1' or 'p2'
+    let vsCPU = true;
+
+    function renderBoard(){
+      boardEl.innerHTML = '';
+      board.forEach((cell,i)=>{
+        const d = document.createElement('div');
+        d.className = 'cell';
+        d.textContent = cell || '';
+        d.addEventListener('click', ()=> onCell(i));
+        boardEl.appendChild(d);
+      });
+      updateStatus();
+    }
+    function onCell(i){
+      if(board[i]) return;
+      if(vsCPU && turn==='p2') return;
+      board[i] = (turn==='p1')? icon1: icon2;
+      if(checkEnd()) return;
+      turn = (turn==='p1')? 'p2':'p1';
+      if(vsCPU && turn==='p2'){ setTimeout(cpuMove,350); }
+      renderBoard();
+    }
+    function cpuMove(){
+      // simple AI: win -> block -> center -> corner -> random
+      const pickWin = findWinningMove(icon2);
+      if(pickWin!==null){ board[pickWin]=icon2; if(checkEnd()) return; turn='p1'; renderBoard(); return; }
+      const block = findWinningMove(icon1);
+      if(block!==null){ board[block]=icon2; if(checkEnd()) return; turn='p1'; renderBoard(); return; }
+      if(!board[4]){ board[4]=icon2; if(checkEnd()) return; turn='p1'; renderBoard(); return; }
+      const corners = [0,2,6,8].filter(i=>!board[i]);
+      if(corners.length){ board[corners[Math.floor(Math.random()*corners.length)]]=icon2; if(checkEnd()) return; turn='p1'; renderBoard(); return; }
+      const empties = board.map((v,i)=>v?null:i).filter(v=>v!==null);
+      if(empties.length){ board[empties[Math.floor(Math.random()*empties.length)]]=icon2; if(checkEnd()) return; turn='p1'; renderBoard(); return; }
+    }
+    function findWinningMove(marker){
+      const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+      for(const w of wins){
+        const [a,b,c]=w; const vals=[board[a],board[b],board[c]];
+        if(vals.filter(x=>x===marker).length===2 && vals.includes(null)){
+          return w[vals.indexOf(null)];
+        }
+      }
+      return null;
+    }
+    function checkEnd(){
+      const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+      for(const w of wins){
+        const [a,b,c]=w;
+        if(board[a] && board[a]===board[b] && board[a]===board[c]){
+          setTimeout(()=> alert(`${board[a]} gana!`),50);
+          return true;
+        }
+      }
+      if(board.every(Boolean)){ setTimeout(()=> alert('Empate!'),50); return true; }
+      return false;
+    }
+    document.getElementById('newGame').addEventListener('click', ()=>{ board = Array(9).fill(null); turn='p1'; renderBoard(); });
+    document.getElementById('toggleMode').addEventListener('click', (e)=>{ vsCPU = !vsCPU; e.target.textContent = vsCPU? 'Modo: vs CPU':'Modo: 2 Jugadores'; board = Array(9).fill(null); turn='p1'; renderBoard(); });
+
+    function updateStatus(){ statusEl.textContent = (turn==='p1')? 'Jugador 1 '+icon1 : (vsCPU? 'CPU '+icon2 : 'Jugador 2 '+icon2); }
+
+    renderBoard();
+  </script>
+</body>
+</html>
